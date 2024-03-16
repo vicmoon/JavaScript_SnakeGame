@@ -3,6 +3,7 @@ const playBoard= document.querySelector('.board');
 const scoreCounter = document.querySelector('.score')
 const highScoreCounter = document.querySelector('.high-score');
 const controls = document.querySelectorAll('.controls i'); 
+const wrapper = document.querySelector('.wrapper'); 
 
 
  
@@ -21,7 +22,6 @@ let score = 0;
 
 // Get high-score from local storage 
 let highScore = localStorage.getItem('high-score') || 0; 
-console.log(highScore);
 highScoreCounter.innerHTML = `Highest Score : ${highScore}`;
 
 //Generate random positon of the food 
@@ -38,7 +38,6 @@ const handleGameOver= function(){
 }
 
 const changeDirection = function(e){
-
     if(e.key === "ArrowUp" && speedY !=1){
         speedX = 0; 
         speedY =-1;
@@ -63,10 +62,11 @@ const initGame = function(){
     // Check if the snake ate the food 
     if(snakeX === foodX && snakeY === foodY){
     changefoodPosition(); 
+    changeBorderColorEat();
     snakeBody.push([foodX, foodY]);  // Add food to the snake body 
     score++; // Increment score by 1 when the snake ate 
-
     highScore = score >= highScore? score : highScore; 
+
     localStorage.setItem("high-score", highScore);  // storing to local storage 
     scoreCounter.innerHTML= `Score : ${score}`;
     highScoreCounter.innerHTML = `Highest Score : ${highScore}`;
@@ -74,20 +74,22 @@ const initGame = function(){
 
 
     for(let i= snakeBody.length - 1; i > 0; i--){
-        //shifting forward the sake body elements 
+        //shifting forward the snake body elements 
         snakeBody[i]= snakeBody[i-1]; 
     }     
     
-    snakeBody[0]= [snakeX, snakeY];  // Set the first snake body element to current snake position 
+        snakeBody[0]= [snakeX, snakeY];  // Set the first snake body element to current snake position 
 
 
     // Change head position  based on current velocity 
     snakeX += speedX; 
     snakeY += speedY;
 
-   //If the snake hit the wall, set gameOver to true
+   //If the snake hits the wall, set gameOver to true
    if(snakeX <=0|| snakeX >30 || snakeY <=0|| snakeY >30){
     gameOver = true;
+    wrapper.style.borderColor = "red";
+    wrapper.style.backgroundColor = "red";
    }
 
     for(let i=0; i <snakeBody.length; i++){
@@ -102,6 +104,9 @@ const initGame = function(){
 };
 
 
+const changeBorderColorEat = function(){
+    wrapper.style.borderColor = "yellow";
+}
 
 // Event listener 
 
@@ -113,8 +118,7 @@ controls.forEach(key => {
 
 
 
-// Main functions 
+// Start functions 
 
 changefoodPosition(); 
-setIntervalId = setInterval(initGame, 180); 
-
+setIntervalId = setInterval(initGame, 130); 
