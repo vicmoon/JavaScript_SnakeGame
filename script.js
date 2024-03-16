@@ -33,7 +33,7 @@ const changefoodPosition = function(){
 
 const handleGameOver= function(){
     clearInterval(setIntervalId); 
-    alert("Game over! Press OK to restart");
+    alert("Game over💥 Press OK to restart 🐍");
     location.reload(); 
 }
 
