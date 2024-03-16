@@ -1,25 +1,31 @@
 body{
     display: flex;
+    flex-direction: column;
     margin-top: 20vh;
     justify-content: center;
-    min-height: 100vh;
     text-align: center;
     box-sizing: border-box;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     background-color: black;
+   
 }
 
+h1 {
+    color: green;
+    margin-top: -100px;
+}
 
 .wrapper{
-    width: 40rem;
-    height: 40rem;
+    width: 65vmin;
+    height: 70vmin;
     display: flex;
+    margin: 0 auto;
     flex-direction: column;
     overflow: hidden;
     background-color: #FDE767;
     border: 2px solid green;
     border-style: dotted;
-    position: fixed;
+   
    
 }
 
